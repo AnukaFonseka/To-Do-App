@@ -14,6 +14,13 @@ export default {
         "white-snow": "#fefefe", // Almost white
         "blush-white": "#f9f9f9", // Soft white
       },
+      
+      scale: {
+        '101': '1.01',
+        '102': '1.02',
+        '103': '1.03',
+        '104': '1.04',
+      },
     },
   },
   plugins: [],
