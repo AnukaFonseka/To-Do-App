@@ -1,32 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-// import Swal from "sweetalert2";
-// import { useNavigate } from "react-router-dom";
 
-const Sidebar = ({ user, taskCounts }) => {
-//   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // Swal.fire({
-    //   title: "Are you sure you want to logout?",
-    //   icon: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#d33",
-    //   cancelButtonColor: "#3085d6",
-    //   confirmButtonText: "Logout",
-    //   customClass: {
-    //     popup: "w-10/12 max-w-xs md:max-w-lg",
-    //     title: "text-lg md:text-2xl",
-    //     icon: "text-sm md:text-lg",
-    //   },
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     localStorage.clear();
-    //     navigate("/");
-    //   }
-    // });
+const Sidebar = ({ user }) => {
+
+  const todos = useSelector((state) => state.todos.todos);
+
+  const taskCounts = {
+    all: todos.length,
+    completed: todos.filter((todo) => todo.completed).length,
+    todo: todos.filter((todo) => !todo.completed).length,
   };
 
   return (
@@ -46,7 +32,7 @@ const Sidebar = ({ user, taskCounts }) => {
           </div>
           <span
             class="material-symbols-outlined block md:hidden"
-            onClick={handleLogout}
+            
           >
             logout
           </span>
@@ -100,7 +86,6 @@ const Sidebar = ({ user, taskCounts }) => {
       {/* Logout Button */}
       <button
         className="hidden md:block bg-red-600 hover:bg-red-700 transition-all duration-300 text-white py-3 px-4 rounded-lg shadow-md mt-8 w-full text-lg font-semibold"
-        onClick={handleLogout}
       >
         Logout
       </button>
