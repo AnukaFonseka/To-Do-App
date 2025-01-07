@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../features/todos/todoSlice';
+import { addTodo, deleteTodo, editTodo, toggleTodoStatus } from '../features/todos/todoSlice';
+import { Button, IconButton } from '@mui/material';
 import Sidebar from '../components/Sidebar'
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import NewTodoDialog from '../components/NewTodoDialog';
 
 const Home = () => {
 
@@ -12,30 +13,43 @@ const Home = () => {
         email: "john@gmail.com"
     }
 
-    const taskCounts = {
-        all: 10,
-        completed: 5,
-        todo: 5
-    }
-
     const [open, setOpen] = useState(false);
-    const [task, setTask] = useState('');
+    const [editTask, setEditTask] = useState(null);
     const dispatch = useDispatch();
-    const todos = useSelector(state => state.todos.todos);
+    const todos = useSelector((state) => state.todos.todos);
 
-    const handleAddTask = () => {
-      if (task.trim()) {
-        dispatch(addTodo({ content: task }));
-        setTask('');
-        setOpen(false);
+    const handleAddTask = (task) => {
+      dispatch(addTodo({ ...task }));
+    };
+
+    const handleEditTask = (task) => {
+      if (editTask) {
+        dispatch(editTodo({ id: editTask.id, ...task }));
+        setEditTask(null);
       }
     };
+  
+    const handleOpenEditDialog = (todo) => {
+      setEditTask(todo);
+      setOpen(true);
+    };
+  
+    const handleDeleteTask = (id) => {
+      dispatch(deleteTodo(id));
+    };
+
+    const handleCheckTask = (id) => {
+      dispatch(toggleTodoStatus(id));
+    }
+
+
   return (
     <div className="flex flex-col md:flex-row min-w-screen min-h-screen bg-cover bg-center relative">
-        <Sidebar user={user} taskCounts={taskCounts} />
-        <div className='w-full p-12 flex flex-col'>
-        <div className='flex justify-between'>
-          <div>
+        <Sidebar user={user} />
+        
+        <div className='w-full p-12 flex flex-col items-center relative z-10'>
+        <div className='flex flex-col md:flex-row items-center text-center md:text-left justify-between w-full mb-10 z-30'>
+          <div className='hidden md:flex flex-col mb-5 md:mb-0'>
             <h1 className='text-3xl md:text-5xl font-bold mb-2'>TaskMate</h1>
             <span>Your friendly companion for productivity</span>
           </div>
@@ -51,32 +65,50 @@ const Home = () => {
             Add New Task
           </Button>
         </div>
-        <div className="grid gap-4 mt-8">
-          {todos.map(todo => (
-            <div key={todo.id} className={`p-4 border rounded ${todo.completed ? 'bg-green-200' : 'bg-white'}`}>
-              <span>{todo.content}</span>
-            </div>
-          ))}
+
+        {/* Todo Grid */}
+        <div className="grid gap-4 mt-8 w-full">
+          {todos.map((todo) => (
+              <div key={todo.id} className={`p-4 border rounded cursor-pointer hover:scale-101 transition-all duration-300 
+                ${todo.completed ? 'bg-green-200' : 'bg-white'}`}
+                onClick={() => handleCheckTask(todo.id)}
+              >
+                <div className="flex justify-between items-center">
+                  <div className='flex items-center'>
+                    <input 
+                      type="checkbox" 
+                      checked={todo.completed} 
+                      onChange={() => handleCheckTask(todo.id)} 
+                      className="form-checkbox h-4 md:h-6 w-4 md:w-6 !text-green-500 cursor-pointer outline-none mr-4"
+                    />
+                  <div>
+                    
+                    <span className="text-sm">{new Date(todo.date).toLocaleDateString()} | {new Date(todo.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    <h3 className="text-lg">{todo.content}</h3>
+                  </div>
+                  </div>
+                  
+                  <div>
+                    <IconButton onClick={() => handleOpenEditDialog(todo)} color="primary">
+                      <span className="material-symbols-outlined">edit</span>
+                    </IconButton>
+                    <IconButton onClick={() => handleDeleteTask(todo.id)} color="secondary">
+                      <span className="material-symbols-outlined">delete</span>
+                    </IconButton>
+                  </div>
+                </div>
+              </div>
+            ))}
         </div>    
         </div>
+        <NewTodoDialog
+          open={open}
+          onClose={() => setOpen(false)}
+          onSubmit={editTask ? handleEditTask : handleAddTask}
+          initialTask={editTask}
+        />
 
-        <Dialog open={open} onClose={() => setOpen(false)}>
-          <DialogTitle>Add New Task</DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              label="Task"
-              fullWidth
-              value={task}
-              onChange={e => setTask(e.target.value)}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setOpen(false)}>Cancel</Button>
-            <Button onClick={handleAddTask}>Add</Button>
-          </DialogActions>
-        </Dialog>
+        
     </div>
   )
 }
