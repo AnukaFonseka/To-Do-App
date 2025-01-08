@@ -16,7 +16,7 @@ const Sidebar = ({ user }) => {
   };
 
   return (
-    <div className="w-full md:w-1/4 bg-gradient-to-b from-[#001f3f] to-[#3b4a66] text-white md:h-screen p-8 flex flex-col justify-between shadow-lg">
+    <div className="w-full md:w-1/4 bg-gradient-to-b from-[#001f3f] to-[#3b4a66] text-white md:h-screen p-8 md:pt-1 flex flex-col justify-between shadow-lg">
       {/* User Info */}
       <div className="space-y-8 flex flex-col justify-evenly h-full">
         <div className="text-center flex md:flex-col items-center justify-between text-blue-200 md:text-white">
@@ -82,13 +82,6 @@ const Sidebar = ({ user }) => {
           </LocalizationProvider>
         </div>
       </div>
-
-      {/* Logout Button */}
-      <button
-        className="hidden md:block bg-red-400 hover:bg-red-700 transition-all duration-300 text-white py-3 px-4 rounded-lg shadow-md mt-8 w-full text-lg font-semibold"
-      >
-        Logout
-      </button>
     </div>
   );
 };

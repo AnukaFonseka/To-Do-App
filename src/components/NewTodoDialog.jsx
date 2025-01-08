@@ -5,6 +5,7 @@ const NewTodoDialog = ({ open, onClose, onSubmit, initialTask }) => {
   const [task, setTask] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const [errors, setErrors] = useState({ task: '', date: '', time: '' });
 
   useEffect(() => {
     if (initialTask) {
@@ -18,8 +19,29 @@ const NewTodoDialog = ({ open, onClose, onSubmit, initialTask }) => {
     }
   }, [initialTask]);
 
+  const validateForm = () => {
+    let valid = true;
+    const newErrors = { task: '', date: '', time: '' };
+
+    if (!task.trim()) {
+      newErrors.task = 'Task description is required.';
+      valid = false;
+    }
+    if (!date) {
+      newErrors.date = 'Date is required.';
+      valid = false;
+    }
+    if (!time) {
+      newErrors.time = 'Time is required.';
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
+
   const handleSubmit = () => {
-    if (task.trim() && date && time) {
+    if (validateForm()) {
       const dateTime = new Date(`${date}T${time}`).toISOString();
       onSubmit({ content: task, date: dateTime });
       setTask('');
@@ -40,6 +62,8 @@ const NewTodoDialog = ({ open, onClose, onSubmit, initialTask }) => {
           fullWidth
           value={task}
           onChange={(e) => setTask(e.target.value)}
+          error={!!errors.task}
+          helperText={errors.task}
         />
         <TextField
           margin="dense"
@@ -49,6 +73,8 @@ const NewTodoDialog = ({ open, onClose, onSubmit, initialTask }) => {
           value={date}
           onChange={(e) => setDate(e.target.value)}
           InputLabelProps={{ shrink: true }}
+          error={!!errors.date}
+          helperText={errors.date}
         />
         <TextField
           margin="dense"
@@ -58,6 +84,8 @@ const NewTodoDialog = ({ open, onClose, onSubmit, initialTask }) => {
           value={time}
           onChange={(e) => setTime(e.target.value)}
           InputLabelProps={{ shrink: true }}
+          error={!!errors.time}
+          helperText={errors.time}
         />
       </DialogContent>
       <DialogActions>

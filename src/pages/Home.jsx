@@ -141,7 +141,10 @@ const Home = () => {
 
         <NewTodoDialog
           open={open}
-          onClose={() => setOpen(false)}
+          onClose={() => {
+            setOpen(false)
+            setEditTask(null)
+          }}
           onSubmit={editTask ? handleEditTask : handleAddTask}
           initialTask={editTask}
         />

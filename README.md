@@ -106,7 +106,7 @@ The checkbox toggles task completion status without triggering the parent div's 
   className="w-4 h-4"
 />
 
-event.stopPropagation() prevents event bubbling to the parent div.
+event.stopPropagation() //prevents event bubbling to the parent div.
 ```
 
 ### Task Summary
