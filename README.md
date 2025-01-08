@@ -1,4 +1,4 @@
-TaskMate
+##TaskMate##
 
 TaskMate is a task management application designed to boost productivity by organizing and tracking daily tasks. This app features a user-friendly interface with a sidebar, task list, and calendar. It allows users to add, edit, complete, and delete tasks.
 
