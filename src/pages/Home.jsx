@@ -82,7 +82,6 @@ const Home = () => {
                   }}
                 >
                   <div className="flex justify-between items-center">
-                    <div className='flex items-center'>
                       <input 
                         id="default-checkbox"
                         type="checkbox" 
@@ -93,17 +92,14 @@ const Home = () => {
                         }} 
                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 mr-4 cursor-pointer outline-none"
                       />
-                    <div>
-                      
                       <span className="text-sm">{new Date(todo.date).toLocaleDateString()} | {new Date(todo.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                      <h3 
-                        className={`${todo.completed? "line-through text-gray-500": "text-gray-800"} md:text-xl font-medium md:font-semibold`}>
-                          {todo.content}
-                      </h3>
                     </div>
-                    </div>
-                    
-                    <div className=''>
+                    <h3 
+                      className={`${todo.completed? "line-through text-gray-500": "text-gray-800"} md:text-xl font-medium md:font-semibold my-3`}>
+                        {todo.content}
+                    </h3>
+
+                    <div className='flex space-x-2 md:space-x-4 w-full items-center justify-end'>
                       <IconButton 
                         onClick={(event) => {
                           event.stopPropagation();
@@ -121,7 +117,6 @@ const Home = () => {
                         <span className="material-symbols-outlined text-red-500">delete</span>
                       </IconButton>
                     </div>
-                  </div>
                 </div>
               ))}
           </div>   
