@@ -100,15 +100,11 @@ Material-UI: For providing pre-designed React components that streamline UI deve
 Redux Toolkit: For efficient state management.
 Tailwind CSS: For utility-first CSS styling that enhances development speed and consistency.
 Future Enhancements
-User authentication (sign up, login, etc.)
-Backend integration for persistent storage (e.g., Firebase, Node.js)
 Task prioritization feature
 Notifications/Reminders for upcoming tasks
 Dark mode support
 Feel free to explore, modify, and contribute to the project!
 
-markdown
-Copy code
 
 ### Key Sections:
 1. **Overview** of the app and its main features.
