@@ -18,7 +18,6 @@ TaskMate is a productivity-focused task management app designed to help users st
 - **Frontend**: React.js, Material-UI, Tailwind CSS
 - **State Management**: Redux Toolkit
 - **Date Handling**: `dayjs` for date management
-- **Backend**: (You can add backend details here if applicable)
   
 ## Installation
 
@@ -32,36 +31,47 @@ Before running the project, ensure you have the following installed:
 ### Steps
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/taskmate.git
-Navigate to the project directory:
+```bash
+git clone https://github.com/AnukaFonseka/To-Do-App.git
+```
 
-bash
-Copy code
-cd taskmate
-Install dependencies:
+2. Navigate to the project directory:
+```bash
+cd To-Do-App
+```
 
-bash
-Copy code
+3. Install dependencies:
+```bash
 npm install
-# or if you prefer yarn
-yarn install
-Start the development server:
+```
 
-bash
-Copy code
+or if you prefer yarn
+```bash
+yarn install
+```
+
+4. Start the development server:
+
+```bash
 npm start
-# or
+```
+or
+```bash
 yarn start
+```
+
 Open your browser and go to http://localhost:3000 to see the application.
 
-Usage
+
+## Usage
+
 Add a New Task: Click the "Add New Task" button, fill in the task details, and click "Add."
 Edit an Existing Task: Click the "edit" button next to a task to modify it.
 Mark a Task as Complete: Check the checkbox next to a task to mark it as completed.
 Delete a Task: Click the "delete" button next to a task to remove it.
 Folder Structure
-bash
+
+```bash
 Copy code
 /src
   /assets        - Static files like images
@@ -72,19 +82,20 @@ Copy code
   /utils         - Utility functions and helpers (e.g., date formatting)
   index.js       - Main entry point for React app
   App.js         - Main app component
-Contributing
+  ```
+## Contributing
 Contributions are welcome! If you'd like to contribute to this project:
 
-Fork the repository.
-Create a new branch (git checkout -b feature-name).
-Make your changes.
-Commit your changes (git commit -am 'Add feature').
-Push to your branch (git push origin feature-name).
-Create a pull request.
-License
+1. Fork the repository.
+2. Create a new branch (git checkout -b feature-name).
+3. Make your changes.
+4. Commit your changes (git commit -am 'Add feature').
+5. Push to your branch (git push origin feature-name).
+6. Create a pull request.
+8. License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Acknowledgements
+## Acknowledgements
 Material-UI: For providing pre-designed React components that streamline UI development.
 Redux Toolkit: For efficient state management.
 Tailwind CSS: For utility-first CSS styling that enhances development speed and consistency.
