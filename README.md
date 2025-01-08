@@ -107,8 +107,6 @@ Notifications/Reminders for upcoming tasks
 Dark mode support
 Feel free to explore, modify, and contribute to the project!
 
-markdown
-Copy code
 
 ### Key Sections:
 1. **Overview** of the app and its main features.
