@@ -75,7 +75,7 @@ const Home = () => {
           {/* Todo Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-10 w-full z-30">
             {todos.map((todo) => (
-                <div key={todo.id} className={`p-4 border rounded cursor-pointer hover:scale-101 transition-all duration-100 
+                <div key={todo.id} className={`p-4 border rounded cursor-pointer hover:scale-103 transition-all duration-100 
                   ${todo.completed ? 'bg-green-200' : 'bg-white'}`}
                   onClick={(event) => {
                     handleCheckTask(todo.id)

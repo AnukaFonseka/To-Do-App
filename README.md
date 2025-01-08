@@ -18,6 +18,23 @@ TaskMate is a productivity-focused task management app designed to help users st
 - **Frontend**: React.js, Material-UI, Tailwind CSS
 - **State Management**: Redux Toolkit
 - **Date Handling**: `dayjs` for date management
+
+## Approach
+
+1. **Modal Popup for Task Creation/Editing**:
+   - A modal (`NewTodoDialog`) is used for both adding new tasks and editing existing ones. 
+   - When the user clicks "Add New Task" or "Edit", the modal opens, and the form fields are pre-populated if editing an existing task.
+   - The modal is controlled using `open` and `onClose` props, which manage whether the modal is visible or closed.
+   
+2. **Array State Management**:
+   - The app uses Redux Toolkit to manage the state of the tasks. The tasks are stored in an array (`todos`), allowing efficient CRUD operations such as adding, editing, or deleting tasks.
+   - The state is updated through actions dispatched from the components (e.g., `addTodo`, `deleteTodo`, `toggleTodoStatus`, `editTodo`).
+   - The state management allows for seamless re-rendering of the component when tasks are modified, ensuring the UI is always in sync with the data.
+
+3. **Form Validation**:
+   - When adding or editing tasks, the form is validated to ensure that the task content, date, and time fields are filled out.
+   - If the user attempts to submit the form with empty fields, a validation check prevents the submission, ensuring that incomplete tasks are not saved.
+   - The `handleSubmit` function checks that the task is not empty and that a valid date and time are provided before dispatching the action to add or update the task.
   
 ## Installation
 
@@ -60,7 +77,7 @@ or
 yarn start
 ```
 
-Open your browser and go to http://localhost:3000 to see the application.
+Open your browser and go to http://localhost:5173 to see the application.
 
 
 ## Usage
