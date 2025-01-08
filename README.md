@@ -95,6 +95,7 @@ Deleting a Task: Click the delete icon next to a task to remove it.
 
 The checkbox toggles task completion status without triggering the parent div's click event:
 
+```js
 <input
   type="checkbox"
   checked={todo.completed}
@@ -106,15 +107,18 @@ The checkbox toggles task completion status without triggering the parent div's 
 />
 
 event.stopPropagation() prevents event bubbling to the parent div.
+```
 
 ### Task Summary
 
 The sidebar displays dynamic task counts:
 
+```jsx
 <li>
   <span>To-do :</span>
   <span>{taskCounts.todo}</span>
 </li>
+```
 
 ## Future Enhancements
 
