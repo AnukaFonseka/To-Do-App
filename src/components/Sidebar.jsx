@@ -21,7 +21,7 @@ const Sidebar = ({ user }) => {
       <div className="space-y-8 flex flex-col justify-evenly h-full">
         <div className="text-center flex md:flex-col items-center justify-between text-blue-200 md:text-white">
           <div className="flex md:flex-col items-center space-x-2 md:space-x-0">
-            <div className="w-10 h-10 md:w-24 md:h-24 mx-auto bg-blue-600 rounded-full flex items-center justify-center md:text-3xl md:font-bold shadow-lg">
+            <div className="w-10 h-10 md:w-24 md:h-24 mx-auto bg-slate-600 rounded-full flex items-center justify-center md:text-3xl md:font-bold shadow-lg">
               {user.firstName?.charAt(0)}
               {user.lastName?.charAt(0)}
             </div>
@@ -37,7 +37,7 @@ const Sidebar = ({ user }) => {
             logout
           </span>
           <p className="text-gray-400 mt-2 text-sm md:block hidden">
-            {user.email || "user@example.com"}
+            {user.email}
           </p>
         </div>
 
@@ -76,7 +76,7 @@ const Sidebar = ({ user }) => {
         </div>
 
         {/* Calendar */}
-        <div className="bg-blue-200/70 rounded-lg shadow-md p-4 !w-full hidden md:block">
+        <div className="bg-slate-100 rounded-lg shadow-md p-4 !w-full hidden md:block">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateCalendar className="text-black" />
           </LocalizationProvider>
@@ -85,7 +85,7 @@ const Sidebar = ({ user }) => {
 
       {/* Logout Button */}
       <button
-        className="hidden md:block bg-red-600 hover:bg-red-700 transition-all duration-300 text-white py-3 px-4 rounded-lg shadow-md mt-8 w-full text-lg font-semibold"
+        className="hidden md:block bg-red-400 hover:bg-red-700 transition-all duration-300 text-white py-3 px-4 rounded-lg shadow-md mt-8 w-full text-lg font-semibold"
       >
         Logout
       </button>

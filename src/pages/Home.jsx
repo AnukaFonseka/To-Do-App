@@ -4,6 +4,8 @@ import { addTodo, deleteTodo, editTodo, toggleTodoStatus } from '../features/tod
 import { Button, IconButton } from '@mui/material';
 import Sidebar from '../components/Sidebar'
 import NewTodoDialog from '../components/NewTodoDialog';
+import bg from '../assets/images/b2.jpg';
+import nodata from "../assets/images/nodata.svg";
 
 const Home = () => {
 
@@ -44,14 +46,18 @@ const Home = () => {
 
 
   return (
-    <div className="flex flex-col md:flex-row min-w-screen min-h-screen bg-cover bg-center relative">
+    <div 
+      className="flex flex-col md:flex-row bg-cover bg-center relative"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
         <Sidebar user={user} />
 
-        <div className='w-full p-12 flex flex-col items-center relative z-10'>
+        <div className='w-full p-12 flex flex-col items-center relative z-10 min-w-screen min-h-screen'>
+          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
           <div className='flex flex-col md:flex-row items-center text-center md:text-left justify-between w-full mb-10 z-30'>
             <div className='hidden md:flex flex-col mb-5 md:mb-0'>
-              <h1 className='text-3xl md:text-5xl font-bold mb-2'>TaskMate</h1>
-              <span>Your friendly companion for productivity</span>
+              <h1 className='text-white text-3xl md:text-5xl font-bold mb-2'>TaskMate</h1>
+              <span className='text-white'>Your friendly companion for productivity</span>
             </div>
             <Button
               onClick={() => setOpen(true)}
@@ -67,11 +73,13 @@ const Home = () => {
           </div>
 
           {/* Todo Grid */}
-          <div className="grid gap-4 mt-8 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-10 w-full z-30">
             {todos.map((todo) => (
-                <div key={todo.id} className={`p-4 border rounded cursor-pointer hover:scale-101 transition-all duration-300 
+                <div key={todo.id} className={`p-4 border rounded cursor-pointer hover:scale-101 transition-all duration-100 
                   ${todo.completed ? 'bg-green-200' : 'bg-white'}`}
-                  onClick={() => handleCheckTask(todo.id)}
+                  onClick={(event) => {
+                    handleCheckTask(todo.id)
+                  }}
                 >
                   <div className="flex justify-between items-center">
                     <div className='flex items-center'>
@@ -79,28 +87,60 @@ const Home = () => {
                         id="default-checkbox"
                         type="checkbox" 
                         checked={todo.completed} 
-                        onChange={() => handleCheckTask(todo.id)} 
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleCheckTask(todo.id)
+                        }} 
                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 mr-4 cursor-pointer outline-none"
                       />
                     <div>
                       
                       <span className="text-sm">{new Date(todo.date).toLocaleDateString()} | {new Date(todo.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                      <h3 className="text-lg">{todo.content}</h3>
+                      <h3 
+                        className={`${todo.completed? "line-through text-gray-500": "text-gray-800"} md:text-xl font-medium md:font-semibold`}>
+                          {todo.content}
+                      </h3>
                     </div>
                     </div>
                     
-                    <div>
-                      <IconButton onClick={() => handleOpenEditDialog(todo)} color="primary">
-                        <span className="material-symbols-outlined">edit</span>
+                    <div className=''>
+                      <IconButton 
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleOpenEditDialog(todo)
+                        }} 
+                        color="primary">
+                          <span className="material-symbols-outlined">edit</span>
                       </IconButton>
-                      <IconButton onClick={() => handleDeleteTask(todo.id)} color="secondary">
-                        <span className="material-symbols-outlined">delete</span>
+                      <IconButton 
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleDeleteTask(todo.id)
+                        }} 
+                        color="secondary">
+                        <span className="material-symbols-outlined text-red-500">delete</span>
                       </IconButton>
                     </div>
                   </div>
                 </div>
               ))}
           </div>   
+
+          {todos?.length === 0 && (
+            <div className="md:absolute md:inset-0 flex flex-col items-center justify-center z-20">
+              <img
+                src={nodata}
+                alt="No Data"
+                className="w-36 h-36 md:w-80 md:h-80"
+              />
+              <p className="text-white mt-8 text-xl md:text-2xl font-semibold">
+                No tasks available
+              </p>
+              <p className="text-gray-300 mt-2 text-sm md:text-base">
+                Add a new task to get started!
+              </p>
+            </div>
+          )}
 
         </div>
 
